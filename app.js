@@ -61,7 +61,6 @@ app.get('/users', async (req, res) => {
 
 app.post('/users', async (req, res) => {
   const { mail, password } = req.body
-  console.log(req.body)
 
   let collection = client.db("website").collection("users")
   const result = await collection.findOne({
@@ -81,6 +80,7 @@ app.post('/users', async (req, res) => {
       spotList: result.spotList,
       token
     }
+    res.header("Content-Type", "application/json; charset=utf-8") // utf-8
     res.end(JSON.stringify({ msg: "登入成功", info: userData }))
   } else {
     res.end(JSON.stringify({ msg: "您的帳號或密碼錯誤" }))

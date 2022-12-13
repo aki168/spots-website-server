@@ -42,8 +42,8 @@ app.use(session({
 }))  
 
 app.get('/', (req, res)=>{
-  // res.send('Hey this is my API running 🥳')
-  res.render('index.ejs')
+  res.send('Hey this is my API running 🥳')
+  // res.render('index.ejs')
 })
 
 app.get('/users', async (req, res) => {

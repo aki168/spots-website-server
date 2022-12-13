@@ -103,6 +103,7 @@ app.patch('/users', async (req, res) => {
           $set: { spotList }
         })
         if (result.modifiedCount >= 1) {
+          res.header("Content-Type", "application/json; charset=utf-8") // utf-8
           res.end(JSON.stringify({ msg: "修改成功" }))
         } else {
           res.end(JSON.stringify({ msg: "setting error" }))
@@ -119,14 +120,14 @@ app.post('/register', async (req, res) => {
   let collection = client.db("website").collection("users")
   const isExist = await collection.findOne({ mail })
   if (isExist) {
-    res.send({ msg: "您已經註冊過囉" })
-    res.end()
+    res.header("Content-Type", "application/json; charset=utf-8") // utf-8
+    res.end(JSON.stringify({ msg: "您已經註冊過囉" }))
   }
   if (isExist === null) {
     const result = await collection.insertOne({ name, mail, password, role, spotList: [] })
     if (result) {
-      res.send({ msg: "註冊成功" })
-      res.end()
+      res.header("Content-Type", "application/json; charset=utf-8") // utf-8
+      res.end(JSON.stringify({ msg: "註冊成功" }))
     }
   }
 })
@@ -153,6 +154,7 @@ app.post('/auth', async (req, res) => {
             role: result.role,
             spotList: result.spotList,
           }
+          res.header("Content-Type", "application/json; charset=utf-8") // utf-8
           res.end(JSON.stringify({ auth: true, msg: "驗證成功", info: userData }))
         }
       }
@@ -176,8 +178,8 @@ app.post('/spots', async (req, res) => {
   let collection = client.db("website").collection("spots")
   const result = await collection.insertOne({ name, description, pictureUrl })
   if (result) {
-    res.send({ msg: "新增成功" })
-    res.end()
+    res.header("Content-Type", "application/json; charset=utf-8") // utf-8
+    res.end(JSON.stringify({ msg: "新增成功" }))
   }  
 })  
 
@@ -188,8 +190,8 @@ app.delete('/spots', async (req, res) => {
   const result = await collection.deleteOne({ "_id": ObjectId(objectId) })
   console.log(result)
   if (result.deletedCount >= 1) {
-    res.send({ msg: "刪除成功" })
-    res.end()
+    res.header("Content-Type", "application/json; charset=utf-8") // utf-8
+    res.end(JSON.stringify({ msg: "刪除成功" }))
   }  
 })  
 
@@ -201,6 +203,7 @@ app.patch('/spots', async (req, res) => {
     $set: { name, description }
   })  
   if (result.modifiedCount >= 1) {
+    res.header("Content-Type", "application/json; charset=utf-8") // utf-8
     res.end(JSON.stringify({ msg: "修改成功" }))
   } else {
     res.end(JSON.stringify({ msg: "setting error" }))

@@ -87,6 +87,57 @@ app.post('/users', async (req, res) => {
   }
 })
 
+
+app.post('/pushSpot', async(req, res) => {
+  const { token, objectId } = req.body
+  if (!token) {
+    res.send({ meg: "token is empty" })
+  } else {
+    jwt.verify(token, "jwtSecret", async (err, decoded) => {
+      if (err) {
+        res.send({ auth: false, msg: "auth do not pass" })
+      } else {
+        tId = decoded.tId
+        let collection = client.db("website").collection("users")
+        const result = await collection.updateOne({ "_id": ObjectId(tId) }, {
+          $push: { spotList: objectId }
+        })
+        if (result.modifiedCount >= 1) {
+          res.header("Content-Type", "application/json; charset=utf-8") // utf-8
+          res.end(JSON.stringify({ msg: "景點收藏成功" }))
+        } else {
+          res.end(JSON.stringify({ msg: "setting error" }))
+        }
+      }
+    })
+  }
+})
+
+app.post('/pullSpot', async(req, res) => {
+  const { token, objectId } = req.body
+  if (!token) {
+    res.send({ meg: "token is empty" })
+  } else {
+    jwt.verify(token, "jwtSecret", async (err, decoded) => {
+      if (err) {
+        res.send({ auth: false, msg: "auth do not pass" })
+      } else {
+        tId = decoded.tId
+        let collection = client.db("website").collection("users")
+        const result = await collection.updateOne({ "_id": ObjectId(tId) }, {
+          $pull: { spotList: objectId }
+        })
+        if (result.modifiedCount >= 1) {
+          res.header("Content-Type", "application/json; charset=utf-8") // utf-8
+          res.end(JSON.stringify({ msg: "景點移除成功" }))
+        } else {
+          res.end(JSON.stringify({ msg: "setting error" }))
+        }
+      }
+    })
+  }
+})
+
 app.patch('/users', async (req, res) => {
   let tId = ''
   const { token, spotList } = req.body
@@ -111,7 +162,6 @@ app.patch('/users', async (req, res) => {
       }
     })
   }
-
 })
 
 app.post('/register', async (req, res) => {

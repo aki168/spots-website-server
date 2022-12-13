@@ -21,7 +21,6 @@ const bp = require('body-parser')
 const session = require('express-session')
 const jwt = require('jsonwebtoken')
 const { promisify } = require("util");
-let PORT = 8888
 
 app.set('view engine', 'ejs')
 app.set('view options', './views')
@@ -208,7 +207,7 @@ app.patch('/spots', async (req, res) => {
 })  
 
 
-app.listen(PORT, (err) => {
+app.listen(process.env.PORT || 8888, (err) => {
   if (err) console.log("Error in server setup")
-  console.log("Server listening on Port", PORT);
+  console.log("Server listening on Port", process.env.PORT || 8888);
 })

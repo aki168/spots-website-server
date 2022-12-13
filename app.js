@@ -210,4 +210,6 @@ app.patch('/spots', async (req, res) => {
 app.listen(process.env.PORT || 8888, (err) => {
   if (err) console.log("Error in server setup")
   console.log("Server listening on Port", process.env.PORT || 8888);
-})
+}) 
+
+module.exports = app

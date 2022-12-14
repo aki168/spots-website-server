@@ -1,8 +1,10 @@
-1.
-功能用途: 獲取全站用戶
-呼叫方式: GET /users
-BODY參數: 無
-回傳範例: 
+# 客製化專題 前測後端 -  APIs
+
+## 1. 獲取全站用戶
+* 呼叫方式: GET /users
+* BODY參數: 無
+* 回傳範例: 
+```json=
 [
   {
     "_id": "6395f34cae18c304ae4f1f14",
@@ -26,13 +28,15 @@ BODY參數: 無
   },
   .....
 ]
+```
 
 ---------------------------
-2.
-功能用途: 會員登入
-呼叫方式: POST /users
-BODY參數: mail, password
-回傳範例: {
+## 2. 會員登入
+* 呼叫方式: POST /users
+* BODY參數: mail, password
+* 回傳範例: 
+```json=
+{
   "msg": "登入成功",
   "info": {
     "id": 1,
@@ -48,54 +52,57 @@ BODY參數: mail, password
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0SWQiOiI2Mzk1ZjM2N2FlMThjMzA0YWU0ZjFmMTUiLCJpYXQiOjE2NzA5MDA5NDksImV4cCI6MTY3MDk4NzM0OX0.4q0e8iU14D6obEhATOfOWcO2zVI9zxJIik4lSYDoRpc"
   }
 }
-
+```
 
 ---------------------------
-3.
-功能用途: 批量修改個人收藏景點資料
-呼叫方式: PATCH /users
-BODY參數: token, spotList:string[]
-回傳範例: 
+## 3. 批量修改個人收藏景點資料
+* 呼叫方式: PATCH /users
+* BODY參數: token, spotList:string[]
+* 回傳範例: 
+```json=
 {
   "msg": "修改成功"
 }
-
+```
 ---------------------------
-4.
-功能用途: 新增單一收藏景點
-呼叫方式: POST /pushSpot
-BODY參數: token, ObjectId
-回傳範例: 
+## 4. 新增單一收藏景點
+* 呼叫方式: POST /pushSpot
+* BODY參數: token, objectId
+* 回傳範例: 
+```json=
 {
   "msg": "景點收藏成功"
 }
+```
 
 ---------------------------
-5.
-功能用途: 批量修改個人收藏景點資料
-呼叫方式: POST /pullSpot
-BODY參數: token, ObjectId
-回傳範例: 
+## 5.刪除單一收藏景點
+* 呼叫方式: POST /pullSpot
+* BODY參數: token, objectId
+* 回傳範例: 
+```json=
 {
   "msg": "景點移除成功"
 }
+```
 
 ---------------------------
-6.
-功能用途: 註冊
-呼叫方式: POST /register
-BODY參數: mail, password, name, role
-回傳範例: 
+## 6. 註冊會員
+* 呼叫方式: POST /register
+* BODY參數: mail, password, name, role 
+* 回傳範例: 
+```
 {
   "msg": "註冊成功"
 }
+```
 
 ---------------------------
-7.
-功能用途: 驗證身分後，回傳個人資料
-呼叫方式: POST /auth
-BODY參數: token
-回傳範例: 
+## 7. 驗證身分後，回傳個人資料
+* 呼叫方式: POST /auth
+* BODY參數: token
+* 回傳範例: 
+```json=
 {
   "auth": true,
   "msg": "驗證成功",
@@ -107,13 +114,15 @@ BODY參數: token
     "spotList": []
   }
 }
+```
 
 ---------------------------
-8.
-功能用途: 獲取全站景點
-呼叫方式: GET /spots
-BODY參數: 無
-回傳範例: [
+## 8. 獲取全站景點
+* 呼叫方式: GET /spots
+* BODY參數: 無
+* 回傳範例:
+```json=
+[
   {
     "_id": "6395eed5ae18c304ae4f1f0e",
     "id": 1,
@@ -122,35 +131,38 @@ BODY參數: 無
     "pictureUrl": "https://penghutravel.com/FileDownload/TravelInformation/NotSet/Scenery/378/039-03.jpg"
   }, ....
 ]
+```
 
 ---------------------------
-9.
-功能用途: 新增一個景點 (限管理者)
-呼叫方式: POST /spots
-BODY參數: name, description, pictureUrl [可空值]
-回傳範例: 
+## 9. 新增一個景點 (管理者)
+* 呼叫方式: POST /spots
+* BODY參數: name, description, pictureUrl [可空值]
+* 回傳範例: 
+```json=
 {
   "msg": "新增成功"
 }
+```
 
 ---------------------------
-10.
-功能用途: 刪除一個景點 (限管理者)
-呼叫方式: DELETE /spots
-BODY參數: objectId
-回傳範例: 
+## 10. 刪除一個景點 (管理者)
+* 呼叫方式: DELETE /spots
+* BODY參數: objectId
+* 回傳範例: 
+```json=
 {
   "msg": "刪除成功"
 }
-
+```
 ---------------------------
-11.
-功能用途: 修改一個景點 (限管理者)
-呼叫方式: PATCH /spots
-BODY參數: objectId, name, description
-回傳範例: 
+## 11. 修改一個景點 (管理者)
+* 呼叫方式: PATCH /spots
+* BODY參數: objectId, name, description
+* 回傳範例: 
+```json=
 {
   "msg": "修改成功"
 }
+```
 ---------------------------
 
